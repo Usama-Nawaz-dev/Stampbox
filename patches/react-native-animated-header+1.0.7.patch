@@ -1,0 +1,51 @@
+diff --git a/node_modules/react-native-animated-header/AnimatedHeader.js b/node_modules/react-native-animated-header/AnimatedHeader.js
+index 1e5dd1f..68e5e64 100644
+--- a/node_modules/react-native-animated-header/AnimatedHeader.js
++++ b/node_modules/react-native-animated-header/AnimatedHeader.js
+@@ -18,7 +18,10 @@ type Props = {
+   disabled?: boolean;
+   noBorder?: boolean;
+   parallax?: boolean;
++  loaded?: boolean;
+   imageSource?: any;
++  defaultSource?: any;
++  onLoadImg?: () => void;
+ };
+ 
+ export default class AnimatedHeader extends React.PureComponent<Props> {
+diff --git a/node_modules/react-native-animated-header/Header.js b/node_modules/react-native-animated-header/Header.js
+index e91706e..ce08223 100644
+--- a/node_modules/react-native-animated-header/Header.js
++++ b/node_modules/react-native-animated-header/Header.js
+@@ -115,15 +115,19 @@ export default class Header extends React.PureComponent {
+       ]
+     }
+   }
++  mainImageLoad = () => {
++    this.props.onLoadImg()
++  };
+ 
+   render() {
+-    const { imageSource, toolbarColor, titleStyle, onBackPress, backStyle, backTextStyle } = this.props;
++    const { imageSource, toolbarColor, titleStyle, onBackPress, backStyle, backTextStyle, defaultSource, loaded } = this.props;
+     const height = this._getHeight();
+     const left = this._getLeft();
+     const bottom = this._getBottom();
+     const opacity = this._getOpacity();
+     const fontSize = this._getFontSize();
+     const imageOpacity = this._getImageOpacity();
++    // const loaded = this.state.loaded;
+     const headerStyle = this.props.noBorder ? undefined : { borderBottomWidth: 1, borderColor: '#a7a6ab'}
+ 
+     return (
+@@ -138,8 +142,9 @@ export default class Header extends React.PureComponent {
+           ]}>
+           {imageSource && <Animated.Image 
+             style={[StyleSheet.absoluteFill, {width: null, height: null, opacity: imageOpacity}, this._getImageScaleStyle()]}
+-            source={imageSource}
++            source={loaded ? imageSource : defaultSource}
+             resizeMode='cover'
++            onLoad={this.mainImageLoad}
+           />}
+           <View style={styles.toolbarContainer}>
+             <View style={styles.statusBar} />

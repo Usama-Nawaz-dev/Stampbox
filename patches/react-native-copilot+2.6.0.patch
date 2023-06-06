@@ -1,0 +1,22 @@
+diff --git a/node_modules/react-native-copilot/src/components/style.js b/node_modules/react-native-copilot/src/components/style.js
+index ce9fdfc..7fbe7c1 100644
+--- a/node_modules/react-native-copilot/src/components/style.js
++++ b/node_modules/react-native-copilot/src/components/style.js
+@@ -50,7 +50,7 @@ export default StyleSheet.create({
+     borderWidth: 2,
+     borderRadius: STEP_NUMBER_RADIUS,
+     borderColor: '#FFFFFF',
+-    backgroundColor: '#27ae60',
++    backgroundColor: "#BD725C",
+   },
+   stepNumberText: {
+     fontSize: 10,
+@@ -61,7 +61,7 @@ export default StyleSheet.create({
+     padding: 10,
+   },
+   buttonText: {
+-    color: '#27ae60',
++    color: "#BD725C",
+   },
+   bottomBar: {
+     marginTop: 10,

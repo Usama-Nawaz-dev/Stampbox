@@ -1,0 +1,87 @@
+diff --git a/node_modules/react-native-stories-view/src/stories/ProgressItem.tsx b/node_modules/react-native-stories-view/src/stories/ProgressItem.tsx
+index 595171b..cea63c8 100644
+--- a/node_modules/react-native-stories-view/src/stories/ProgressItem.tsx
++++ b/node_modules/react-native-stories-view/src/stories/ProgressItem.tsx
+@@ -22,7 +22,7 @@ var isBlock = false;
+ var listener: any;
+ const OFFSET = 100;
+ const BAR_WIDTH = 100;
+-const BAR_HEIGHT = 7;
++const BAR_HEIGHT = 3;
+ 
+ function ProgressItem(props: ProgressItemProps) {
+ 	// const [refreshProgress, setRefreshProgress] = useState(true)
+diff --git a/node_modules/react-native-stories-view/src/stories/ProgressView.tsx b/node_modules/react-native-stories-view/src/stories/ProgressView.tsx
+index 5015ae2..959a87c 100644
+--- a/node_modules/react-native-stories-view/src/stories/ProgressView.tsx
++++ b/node_modules/react-native-stories-view/src/stories/ProgressView.tsx
+@@ -82,7 +82,7 @@ export default ProgressView;
+ 
+ const styles = StyleSheet.create({
+ 	parent: {
+-		top: 0,
++		top: -60,
+ 		left: 0,
+ 		right: 0,
+ 		width: "100%",
+diff --git a/node_modules/react-native-stories-view/src/stories/StoryContainer.tsx b/node_modules/react-native-stories-view/src/stories/StoryContainer.tsx
+index 7abad0d..563d637 100644
+--- a/node_modules/react-native-stories-view/src/stories/StoryContainer.tsx
++++ b/node_modules/react-native-stories-view/src/stories/StoryContainer.tsx
+@@ -25,7 +25,7 @@ import UserHeaderView from "./UserHeaderView";
+ import { DEFAULT_DURATION } from "../utils/constant";
+ 
+ const StoryContainer = (props: StoryContainerProps) => {
+-	const [progressIndex, setProgressIndex] = useState(0);
++	const {progressIndex, setProgressIndex} = props;
+ 	const [stopProgress, setStopProgress] = useState(false);
+ 
+ 	useEffect(() => {
+diff --git a/node_modules/react-native-stories-view/src/stories/UserHeaderView.tsx b/node_modules/react-native-stories-view/src/stories/UserHeaderView.tsx
+index 11ccba2..1791087 100644
+--- a/node_modules/react-native-stories-view/src/stories/UserHeaderView.tsx
++++ b/node_modules/react-native-stories-view/src/stories/UserHeaderView.tsx
+@@ -36,10 +36,10 @@ export default UserHeaderView;
+ const styles = StyleSheet.create({
+   parentStyle: {
+     position: 'absolute',
+-    top: 0,
++    top: -15,
+     left: 0, 
+     right:0,
+-    marginTop: '10%',
++    // marginTop: '10%',
+     justifyContent: 'flex-start',
+     flexDirection: 'row',
+     alignItems: 'flex-start', 
+@@ -76,8 +76,10 @@ const styles = StyleSheet.create({
+   imgLeftArrow: {
+     width: 24,
+     height: 24,
++    position: 'absolute',
+     justifyContent: 'center',
+     alignSelf: 'center',
+     marginLeft: '3%',
++    right: 10
+   },
+ });
+diff --git a/node_modules/react-native-stories-view/src/utils/interfaceHelper.tsx b/node_modules/react-native-stories-view/src/utils/interfaceHelper.tsx
+index 45ddbad..8b0b463 100644
+--- a/node_modules/react-native-stories-view/src/utils/interfaceHelper.tsx
++++ b/node_modules/react-native-stories-view/src/utils/interfaceHelper.tsx
+@@ -1,4 +1,4 @@
+-import { CSSProperties, Component, FunctionComponent, FunctionComponentElement } from "react";
++import React,{ CSSProperties, Component, FunctionComponent, FunctionComponentElement } from "react";
+ import { ARROW_LEFT, ARROW_RIGHT } from './constant'
+ import { StyleSheet, ViewStyle, ImageStyle, ImageSourcePropType, ImageURISource } from "react-native";
+ 
+@@ -26,7 +26,8 @@ export interface StoryContainerProps extends CommonProps {
+  
+     headerComponent?: FunctionComponentElement<CommonProps> | undefined
+     userProfile?: UserProps | undefined
+-
++    setProgressIndex?: React.Dispatch<SetStateCallback<T | null | any>>
++    progressIndex?: number | undefined
+     replyView?: ReplyProps | undefined 
+     footerComponent?: FunctionComponentElement<CommonProps> | undefined 
+ 

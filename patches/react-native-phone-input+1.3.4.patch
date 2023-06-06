@@ -1,0 +1,30 @@
+diff --git a/node_modules/react-native-phone-input/dist/PhoneInput.js b/node_modules/react-native-phone-input/dist/PhoneInput.js
+index 8c57f4f..3a17422 100644
+--- a/node_modules/react-native-phone-input/dist/PhoneInput.js
++++ b/node_modules/react-native-phone-input/dist/PhoneInput.js
+@@ -22,6 +22,16 @@ class PhoneInput extends react_1.default.Component {
+                 : null;
+             this.updateValue(number, actionAfterSetState);
+         };
++        this.onBlur = ()=>{
++            if (this.props.onBlur) {
++                this.props.onBlur();
++            }
++        }
++        this.onFocus = ()=>{
++            if (this.props.onFocus) {
++                this.props.onFocus();
++            }
++        }
+         this.onPressFlag = () => {
+             if (this.props.onPressFlag) {
+                 this.props.onPressFlag();
+@@ -187,7 +197,7 @@ class PhoneInput extends react_1.default.Component {
+                         this.inputPhone = ref;
+                     }, accessibilityLabel: this.getAccessibilityLabel(), editable: !disabled, autoCorrect: false, style: [styles_1.default.text, this.props.textStyle], onChangeText: (text) => {
+                         this.onChangePhoneNumber(text);
+-                    }, keyboardType: "phone-pad", underlineColorAndroid: "rgba(0,0,0,0)", value: displayValue }, this.props.textProps))),
++                    }, onBlur: ()=> {this.onBlur()},onFocus: ()=> {this.onFocus()},keyboardType: "phone-pad", underlineColorAndroid: "rgba(0,0,0,0)", value: displayValue }, this.props.textProps))),
+             react_1.default.createElement(CountryPicker_1.default, { ref: (ref) => {
+                     this.picker = ref;
+                 }, selectedCountry: iso2, onSubmit: this.selectCountry, buttonColor: this.props.pickerButtonColor, cancelText: this.props.cancelText, cancelTextStyle: this.props.cancelTextStyle, confirmText: this.props.confirmText, confirmTextStyle: this.props.confirmTextStyle, pickerBackgroundColor: this.props.pickerBackgroundColor, itemStyle: this.props.pickerItemStyle, onPressCancel: this.props.onPressCancel, onPressConfirm: this.props.onPressConfirm })));

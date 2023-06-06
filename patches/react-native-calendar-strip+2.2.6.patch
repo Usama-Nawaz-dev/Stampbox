@@ -1,0 +1,77 @@
+diff --git a/node_modules/react-native-calendar-strip/src/CalendarDay.js b/node_modules/react-native-calendar-strip/src/CalendarDay.js
+index 930b0fd..cee8c01 100644
+--- a/node_modules/react-native-calendar-strip/src/CalendarDay.js
++++ b/node_modules/react-native-calendar-strip/src/CalendarDay.js
+@@ -6,7 +6,7 @@ import React, { Component } from "react";
+ import PropTypes from "prop-types";
+ import moment from "moment";
+ 
+-import { Text, View, Animated, Easing, LayoutAnimation, TouchableOpacity } from "react-native";
++import { Text, View, Animated, Easing, LayoutAnimation , Pressable, TouchableOpacity } from "react-native";
+ import styles from "./Calendar.style.js";
+ 
+ class CalendarDay extends Component {
+@@ -477,7 +477,7 @@ class CalendarDay extends Component {
+     }
+     else {
+       day = (
+-        <TouchableOpacity
++        <Pressable
+           onPress={onDateSelected.bind(this, date)}
+           disabled={!enabled}
+         >
+@@ -513,7 +513,7 @@ class CalendarDay extends Component {
+             )}
+             { this.renderMarking() }
+           </View>
+-        </TouchableOpacity>
++        </Pressable>
+       );
+     }
+ 
+diff --git a/node_modules/react-native-calendar-strip/src/CalendarHeader.js b/node_modules/react-native-calendar-strip/src/CalendarHeader.js
+index bbd0803..debc920 100644
+--- a/node_modules/react-native-calendar-strip/src/CalendarHeader.js
++++ b/node_modules/react-native-calendar-strip/src/CalendarHeader.js
+@@ -1,7 +1,6 @@
+ import React, { Component } from "react";
+ import PropTypes from "prop-types";
+-import { Text, TouchableOpacity } from "react-native";
+-
++import { Text, View, TouchableOpacity } from "react-native";
+ import styles from "./Calendar.style.js";
+ 
+ class CalendarHeader extends Component {
+@@ -89,6 +88,8 @@ class CalendarHeader extends Component {
+         disabled={!onHeaderSelected}
+         style={calendarHeaderContainerStyle}
+       >
++        <View style={{flexDirection:'row' ,alignSelf:'center',justifyContent:'center'}} >
++        
+         <Text
+           style={[
+             styles.calendarHeader,
+@@ -97,8 +98,9 @@ class CalendarHeader extends Component {
+           ]}
+           allowFontScaling={allowHeaderTextScaling}
+         >
+-          {_headerText}
++          {"  "+_headerText}
+         </Text>
++        </View>
+       </TouchableOpacity>
+     );
+   }
+diff --git a/node_modules/react-native-calendar-strip/src/Scroller.js b/node_modules/react-native-calendar-strip/src/Scroller.js
+index a612538..26044d9 100644
+--- a/node_modules/react-native-calendar-strip/src/Scroller.js
++++ b/node_modules/react-native-calendar-strip/src/Scroller.js
+@@ -39,7 +39,7 @@ export default class CalendarScroller extends Component {
+     this.timeoutResetPositionId = null;
+ 
+     this.updateLayout = renderDayParams => {
+-      const itemHeight = renderDayParams.height;
++      const itemHeight = renderDayParams.height * 2;
+       const itemWidth = renderDayParams.width + renderDayParams.marginHorizontal * 2;
+ 
+       const layoutProvider = new LayoutProvider(
